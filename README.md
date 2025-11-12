@@ -78,3 +78,7 @@ Aplikasi MicroBreak Detection mampu:
 - Memberikan umpan balik visual dan log aktivitas untuk membantu manajemen waktu kerja dan istirahat
 
 Metode Haar Cascade cukup efektif untuk deteksi wajah dalam kondisi cahaya stabil, dan dapat digunakan sebagai dasar untuk pengembangan sistem pendeteksi kelelahan atau konsentrasi berbasis visi komputer.
+
+---
+## Video Demo Aplikasi
+https://youtu.be/Rfl4Y8SOT1s
