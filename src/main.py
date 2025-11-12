@@ -161,11 +161,22 @@ class FaceApp(tk.Tk):
             last_seen_time = None
             is_present = False
 
+            # Variabel FPS
+            prev_time = time.time()
+            fps = 0
+
             while self.running:
                 ret, frame = cap.read()
                 if not ret:
                     self.log("[ERROR] Tidak dapat membaca frame dari kamera.")
                     break
+
+                # Hitung FPS
+                current_time = time.time()
+                dt = current_time - prev_time
+                if dt > 0:
+                    fps = 1.0 / dt
+                prev_time = current_time
 
                 # 🔄 Ambil nilai parameter terbaru dari GUI
                 scale_factor = self.scale_var.get()
@@ -208,6 +219,7 @@ class FaceApp(tk.Tk):
 
                 cv2.putText(frame, f"Status: {status}", (10, 25),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 200, 0), 2)
+
                 # Konversi total_time ke jam:menit:detik
                 hours = int(total_time // 3600)
                 minutes = int((total_time % 3600) // 60)
@@ -216,6 +228,10 @@ class FaceApp(tk.Tk):
 
                 cv2.putText(frame, f"Total waktu: {time_str}", (10, 55),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 0), 2)
+                
+                cv2.putText(frame, f"FPS: {fps:.1f}", (width - 150, 25),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 255), 2)
+
                 cv2.imshow("Face Detection Timer", frame)
 
                 key = cv2.waitKey(1) & 0xFF
